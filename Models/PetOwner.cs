@@ -16,15 +16,24 @@ namespace pet_hotel
 
         public string emailAddress { get; set; }
         
-        [JsonIgnore] // ignores the pet when generating the api
-        public List<Pet> pets { get; set;}
+       [JsonIgnore] // ignores the pet when generating the api
+       public List<Pet> pets { get; set;}
 
-        public int petCount {
+       public int petCount {
             get {
                 return (this.pets != null) ? this.pets.Count : 0;
             }
-        }
-  
+        } 
+
+        // public int petCount {get; set;}
+
+        // public void addPet() {
+        //     this.petCount++;
+        // }
+
+        // public void removePet() {
+        //     this.petCount--;
+        // }
     
     }
 }

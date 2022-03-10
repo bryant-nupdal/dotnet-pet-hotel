@@ -59,4 +59,4 @@ namespace pet_hotel
         [Required]
         public int petOwnerid { get; set; }  
     }
-}
+} 

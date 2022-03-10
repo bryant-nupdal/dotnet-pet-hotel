@@ -71,11 +71,13 @@ namespace dotnet_bakery.Migrations
 
             modelBuilder.Entity("pet_hotel.Pet", b =>
                 {
-                    b.HasOne("pet_hotel.PetOwner", null)
+                    b.HasOne("pet_hotel.PetOwner", "petOwner")
                         .WithMany("pets")
                         .HasForeignKey("petOwnerid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("petOwner");
                 });
 
             modelBuilder.Entity("pet_hotel.PetOwner", b =>
