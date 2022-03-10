@@ -24,6 +24,7 @@ namespace pet_hotel
                 return (this.pets != null) ? this.pets.Count : 0;
             }
         }
-
+  
+    
     }
 }

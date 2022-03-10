@@ -33,7 +33,7 @@ namespace pet_hotel.Controllers
         [HttpPost]
         public IActionResult addPet([FromBody] Pet pet)
         {
-            _context.Pet.Add(pet);
+            _context.Add(pet);
             _context.SaveChanges();
             return CreatedAtAction(nameof(getPetById), new { id = pet.id, pet });
         }
@@ -84,22 +84,21 @@ namespace pet_hotel.Controllers
         //     return new List<Pet>{ newPet1, newPet2};
         // }
 
-        [HttpPut(":id/checkin")]
-        public IActionResult checkinPet(int id)
+        [HttpPut("{id}/checkin")]
+        public IActionResult checkInPet(int id)
         {
             Pet pet = _context.Pet.Find(id);
             if (pet == null)
             {
                 return NotFound();
             }
-            DateTime currentDateTime = DateTime.Now;
-            pet.checkedInAt = currentDateTime;
+            pet.checkIn();
             _context.Update(pet);
             _context.SaveChanges();
             return Ok();
         }
 
-         [HttpPut(":id/checkout")]
+         [HttpPut("{id}/checkout")]
         public IActionResult checkOutPet(int id)
         {
             Pet pet = _context.Pet.Find(id);
@@ -107,11 +106,10 @@ namespace pet_hotel.Controllers
             {
                 return NotFound();
             }
-            pet.checkedInAt = null;
+            pet.checkOut();
             _context.Update(pet);
             _context.SaveChanges();
             return Ok();
         }
-
     }
 }

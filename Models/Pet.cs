@@ -5,9 +5,8 @@ using System;
 
 namespace pet_hotel
 {
-
-
-    public enum PetBreedType {
+    public enum PetBreedType
+    {
         Shepherd,
         Poodle,
         Beagle,
@@ -17,43 +16,47 @@ namespace pet_hotel
         Labrador,
         Retriever
     }
-    public enum PetColorType {
+    public enum PetColorType
+    {
         White,
         Black,
         Golden,
         Tricolor,
         Spotted
     }
-    public class Pet {
-        public int id {get; set;}
+    public class Pet
+    {
+        public int id { get; set; }
 
         [Required]
 
-        public string name {get; set;}
+        public string name { get; set; }
 
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PetBreedType breed { get; set; }
-        
+
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PetColorType color { get; set; }
 
-    
-        public Nullable <DateTime> checkedInAt {get; set;}
+
+        public Nullable<DateTime> checkedInAt { get; set; }
 
         // [Required]
+        public void checkIn()
+        {
+            this.checkedInAt = DateTime.Now;
+        }
 
-        public PetOwner petOwner {get; set;}
+        public void checkOut()
+        {
+            this.checkedInAt = null;
+        }
+        public PetOwner petOwner { get; set; }
 
         //Expose the petowner_id column to access it later
         [Required]
-        public int petOwnerid { get; set;}
-
-
-
-        
-        
-
+        public int petOwnerid { get; set; }  
     }
 }
