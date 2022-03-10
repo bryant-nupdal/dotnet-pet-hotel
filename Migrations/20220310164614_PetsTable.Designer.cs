@@ -10,7 +10,7 @@ using pet_hotel.Models;
 namespace dotnet_bakery.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220309212851_PetsTable")]
+    [Migration("20220310164614_PetsTable")]
     partial class PetsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace dotnet_bakery.Migrations
                     b.Property<int>("breed")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("checkedInAt")
+                    b.Property<DateTime?>("checkedInAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("color")

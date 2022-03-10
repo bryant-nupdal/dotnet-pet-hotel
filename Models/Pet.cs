@@ -39,7 +39,12 @@ namespace pet_hotel
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PetColorType color { get; set; }
 
-        public DateTime checkedInAt {get; set;}
+    
+        public Nullable <DateTime> checkedInAt {get; set;}
+
+        // [Required]
+
+        public PetOwner petOwner {get; set;}
 
         //Expose the petowner_id column to access it later
         [Required]

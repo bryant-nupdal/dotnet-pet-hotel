@@ -31,7 +31,7 @@ namespace dotnet_bakery.Migrations
                     name = table.Column<string>(type: "text", nullable: false),
                     breed = table.Column<int>(type: "integer", nullable: false),
                     color = table.Column<int>(type: "integer", nullable: false),
-                    checkedInAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    checkedInAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     petOwnerid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
