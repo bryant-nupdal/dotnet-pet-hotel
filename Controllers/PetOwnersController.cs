@@ -26,11 +26,11 @@ namespace pet_hotel.Controllers
         }
 
         [HttpPost]
-        public IActionResult addOwner([FromBody] PetOwner owner)
+        public IActionResult addOwner([FromBody] PetOwner petowner)
         {
-            _context.PetOwner.Add(owner);
+            _context.PetOwner.Add(petowner);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(getOwnerById), new { id = owner.id }, owner);
+            return CreatedAtAction(nameof(getOwnerById), new { id = petowner.id }, petowner);
         }
 
         [HttpGet("{id}")]
@@ -53,19 +53,20 @@ namespace pet_hotel.Controllers
 
         }
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Pet pet)
+        public IActionResult Put(int id, [FromBody] PetOwner owner)
         {
-            if (id != pet.id) return BadRequest();
+            if (id != owner.id) return BadRequest();
 
             // Make sure the pet we are updating is real
-            if (!_context.Pet.Any(b => b.id == id)) return NotFound();
+            if (!_context.PetOwner.Any(b => b.id == id)) return NotFound();
 
-            _context.Update(pet);
+            _context.Update(owner);
             _context.SaveChanges();
 
             // return the updated pet
-            return Ok(_context.Pet.Include(p => p.petOwner).SingleOrDefault(p => p.id == id));
+            return Ok(owner);
         }
     }
-
+ 
 }
+// _context.PetOwner.Include(p => p.id).SingleOrDefault(p => p.id == id)

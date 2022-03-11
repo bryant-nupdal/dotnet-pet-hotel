@@ -33,10 +33,14 @@ namespace pet_hotel.Controllers
         [HttpPost]
         public IActionResult addPet([FromBody] Pet pet)
         {
+            PetOwner petOwner = _context.PetOwner.SingleOrDefault( m => m.id == pet.petOwnerid);
+            if (petOwner == null) {
+                ModelState.AddModelError("petOwnerid", "Invalid Pet Owner ID");
+                return ValidationProblem(ModelState);
+            }
             _context.Add(pet);
-           
             _context.SaveChanges();
-            return CreatedAtAction(nameof(getPetById), new { id = pet.id, pet });
+            return CreatedAtAction(nameof(getPetById), new { id = pet.id}, pet);
         }
 
         [HttpGet("{id}")]
@@ -85,6 +89,20 @@ namespace pet_hotel.Controllers
 
         //     return new List<Pet>{ newPet1, newPet2};
         // }
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Pet pet)
+        {
+            if (id != pet.id) return BadRequest();
+
+            // Make sure the pet we are updating is real
+            if (!_context.Pet.Any(b => b.id == id)) return NotFound();
+
+            _context.Update(pet);
+            _context.SaveChanges();
+
+            // return the updated pet
+            return Ok(pet);
+        }
 
         [HttpPut("{id}/checkin")]
         public IActionResult checkInPet(int id)
